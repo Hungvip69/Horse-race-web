@@ -331,7 +331,7 @@ function resetRace() {
             horse.element.style.left = '0px';
             horse.element.classList.remove('winner');
             // Đảm bảo ngựa sử dụng ảnh avatar khi chưa chạy
-            horse.element.style.backgroundImage = "url('https://s3.ezgif.com/tmp/ezgif-35b9a4df106763-gif-im/frame_2_delay-0.1s.gif')";
+            horse.element.style.backgroundImage = "url('https://github.com/Hungvip69/Horse-race-web/blob/main/frame_3_delay-0.1s.gif')";
         }
     });
     
