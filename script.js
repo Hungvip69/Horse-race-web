@@ -126,7 +126,7 @@ function initElements() {
         horse.element = document.getElementById(`horse-${horse.id}`);
         // Đặt ảnh avatar cho ngựa khi khởi tạo
         if (horse.element) {
-            horse.element.style.backgroundImage = "url('https://github.com/Hungvip69/Horse-race-web/blob/main/frame_3_delay-0.1s.gif')";
+            horse.element.style.backgroundImage = "url('frame_3_delay-0.1s.gif')";
         }
     });
     
@@ -233,7 +233,7 @@ horses.forEach(horse => {
         horse.element.style.left = '0px';
         horse.element.classList.add('racing');
         // Thay đổi ảnh sang ảnh chạy
-        horse.element.style.backgroundImage = "url('https://github.com/Hungvip69/Horse-race-web/blob/main/ezgif-222680507098f8.gif')";
+        horse.element.style.backgroundImage = "url('ezgif-222680507098f8.gif')";
     }
 });
     
@@ -277,7 +277,7 @@ function endRace(winnerHorse) {
         if (horse.element) {
             horse.element.classList.remove('racing');
             // Đổi lại ảnh avatar
-            horse.element.style.backgroundImage = "url('https://github.com/Hungvip69/Horse-race-web/blob/main/frame_3_delay-0.1s.gif')";
+            horse.element.style.backgroundImage = "url('frame_3_delay-0.1s.gif')";
         }
     });
     
@@ -331,7 +331,7 @@ function resetRace() {
             horse.element.style.left = '0px';
             horse.element.classList.remove('winner');
             // Đảm bảo ngựa sử dụng ảnh avatar khi chưa chạy
-            horse.element.style.backgroundImage = "url('https://github.com/Hungvip69/Horse-race-web/blob/main/frame_3_delay-0.1s.gif')";
+            horse.element.style.backgroundImage = "url('frame_3_delay-0.1s.gif')";
         }
     });
     
