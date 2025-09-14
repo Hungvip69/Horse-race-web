@@ -233,7 +233,7 @@ horses.forEach(horse => {
         horse.element.style.left = '0px';
         horse.element.classList.add('racing');
         // Thay đổi ảnh sang ảnh chạy
-        horse.element.style.backgroundImage = "url('https://github.com/Hungvip69/Horse-race-web/blob/main/ezgif-222680507098f8.gif')";
+        horse.element.style.backgroundImage = "url('ezgif-222680507098f8.gif')";
     }
 });
     
