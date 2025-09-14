@@ -185,6 +185,8 @@ body.dark-mode {
     display: none; /* Ẩn tên ngựa trên sân đua */
 }
 
+
+
 .finish-line {
     position: absolute;
     right: 20px;
@@ -276,7 +278,10 @@ body.dark-mode {
     background-repeat: no-repeat;
     background-position: center;
     margin-right: 15px;
+    position: relative;
 }
+
+
 
 .horse-1-avatar, .horse-2-avatar, .horse-3-avatar, .horse-4-avatar, .horse-5-avatar, .horse-6-avatar {
     background-image: url('./frame_3_delay-0.1s.gif');
