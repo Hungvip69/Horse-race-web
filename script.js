@@ -126,7 +126,7 @@ function initElements() {
         horse.element = document.getElementById(`horse-${horse.id}`);
         // Đặt ảnh avatar cho ngựa khi khởi tạo
         if (horse.element) {
-            horse.element.style.backgroundImage = "url('https://github.com/Hungvip69/Horse-race-web/blob/main/frame_3_delay-0.1s.gif')";
+            horse.element.style.backgroundImage = "url('frame_3_delay-0.1s.gif')";
         }
     });
     
