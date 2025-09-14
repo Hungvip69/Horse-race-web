@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đua Ngựa Vui Nhộn</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="theme-toggle" id="theme-toggle">
+        <span class="theme-toggle-icon"><i class="fas fa-sun"></i></span>
+        <span class="theme-toggle-text">Chế độ sáng</span>
+    </div>
+    <div class="game-container">
+        <!-- Header với thông tin coin -->
+        <div class="header">
+            <div class="coin-display">
+                <img src="https://cdn-icons-png.flaticon.com/512/272/272525.png" alt="Coin" class="coin-icon">
+                <span id="coin-amount">1000</span>
+            </div>
+        </div>
+
+        <!-- Khu vực đua ngựa -->
+        <div class="race-track-container">
+            <div class="race-track">
+                <!-- Các làn đua -->
+                <div class="lane" id="lane-1">
+                    <div class="horse horse-1" id="horse-1">
+                        <div class="horse-name">Thunder Bolt</div>
+                    </div>
+                </div>
+                <div class="lane" id="lane-2">
+                    <div class="horse horse-2" id="horse-2">
+                        <div class="horse-name">Wild Spirit</div>
+                    </div>
+                </div>
+                <div class="lane" id="lane-3">
+                    <div class="horse horse-3" id="horse-3">
+                        <div class="horse-name">Shadow Runner</div>
+                    </div>
+                </div>
+                <div class="lane" id="lane-4">
+                    <div class="horse horse-4" id="horse-4">
+                        <div class="horse-name">Golden Hoof</div>
+                    </div>
+                </div>
+                <div class="lane" id="lane-5">
+                    <div class="horse horse-5" id="horse-5">
+                        <div class="horse-name">Silver Streak</div>
+                    </div>
+                </div>
+                <div class="lane" id="lane-6">
+                    <div class="horse horse-6" id="horse-6">
+                        <div class="horse-name">Midnight Star</div>
+                    </div>
+                </div>
+                <!-- Vạch đích -->
+                <div class="finish-line"></div>
+            </div>
+        </div>
+
+        <!-- Khu vực đặt cược -->
+        <div class="betting-area">
+            <h2>Đặt Cược</h2>
+            <div class="horses-list">
+                <div class="horse-option" data-horse="1">
+                    <div class="horse-avatar horse-1-avatar"></div>
+                    <div class="horse-info">
+                        <div class="horse-name">Thunder Bolt</div>
+                        <button class="bet-button" data-horse="1">Đặt Cược</button>
+                    </div>
+                </div>
+                <div class="horse-option" data-horse="2">
+                    <div class="horse-avatar horse-2-avatar"></div>
+                    <div class="horse-info">
+                        <div class="horse-name">Wild Spirit</div>
+                        <button class="bet-button" data-horse="2">Đặt Cược</button>
+                    </div>
+                </div>
+                <div class="horse-option" data-horse="3">
+                    <div class="horse-avatar horse-3-avatar"></div>
+                    <div class="horse-info">
+                        <div class="horse-name">Shadow Runner</div>
+                        <button class="bet-button" data-horse="3">Đặt Cược</button>
+                    </div>
+                </div>
+                <div class="horse-option" data-horse="4">
+                    <div class="horse-avatar horse-4-avatar"></div>
+                    <div class="horse-info">
+                        <div class="horse-name">Golden Hoof</div>
+                        <button class="bet-button" data-horse="4">Đặt Cược</button>
+                    </div>
+                </div>
+                <div class="horse-option" data-horse="5">
+                    <div class="horse-avatar horse-5-avatar"></div>
+                    <div class="horse-info">
+                        <div class="horse-name">Silver Streak</div>
+                        <button class="bet-button" data-horse="5">Đặt Cược</button>
+                    </div>
+                </div>
+                <div class="horse-option" data-horse="6">
+                    <div class="horse-avatar horse-6-avatar"></div>
+                    <div class="horse-info">
+                        <div class="horse-name">Midnight Star</div>
+                        <button class="bet-button" data-horse="6">Đặt Cược</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nhập số tiền cược -->
+            <div class="bet-amount-container">
+                <label for="bet-amount">Số Coin Cược:</label>
+                <input type="number" id="bet-amount" min="10" max="1000" value="100">
+            </div>
+
+            <!-- Hiển thị ngựa đã chọn -->
+            <div class="selected-horse-container">
+                <p>Ngựa đã chọn: <span id="selected-horse-name">Chưa chọn</span></p>
+            </div>
+
+            <!-- Nút bắt đầu đua -->
+            <button id="start-race" class="primary-button">Bắt Đầu Đua</button>
+            <button id="play-again" class="primary-button hidden">Chơi Lại</button>
+        </div>
+
+        <!-- Kết quả đua -->
+        <div id="race-result" class="race-result hidden">
+            <h2>Kết Quả Đua</h2>
+            <p id="winner-announcement"></p>
+            <p id="bet-result"></p>
+        </div>
+
+        <!-- Nhiệm vụ hằng ngày -->
+        <div class="daily-missions">
+            <h2>Nhiệm Vụ Hằng Ngày</h2>
+            <div class="mission-list">
+                <div class="mission" id="mission-login">
+                    <div class="mission-info">
+                        <div class="mission-name">Đăng nhập mỗi ngày</div>
+                        <div class="mission-reward">+100 coin</div>
+                    </div>
+                    <button class="claim-button" data-mission="login">Nhận thưởng</button>
+                </div>
+                <div class="mission" id="mission-bet">
+                    <div class="mission-info">
+                        <div class="mission-name">Đặt cược 3 lần</div>
+                        <div class="mission-progress">0/3</div>
+                        <div class="mission-reward">+200 coin</div>
+                    </div>
+                    <button class="claim-button" data-mission="bet" disabled>Nhận thưởng</button>
+                </div>
+                <div class="mission" id="mission-win">
+                    <div class="mission-info">
+                        <div class="mission-name">Thắng 1 cuộc đua</div>
+                        <div class="mission-progress">0/1</div>
+                        <div class="mission-reward">+300 coin</div>
+                    </div>
+                    <button class="claim-button" data-mission="win" disabled>Nhận thưởng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thông báo -->
+    <div id="notification" class="notification hidden"></div>
+
+    <!-- Hướng dẫn -->
+    <div class="instructions">
+        <h3>Hướng dẫn chơi</h3>
+        <ul>
+            <li>Chọn một chú ngựa và đặt cược số coin mong muốn</li>
+            <li>Nhấn "Bắt Đầu Đua" để bắt đầu cuộc đua</li>
+            <li>Nếu ngựa bạn chọn thắng, bạn nhận được x2 số coin đã cược</li>
+            <li>Nếu thua, bạn sẽ mất số coin đã cược</li>
+            <li>Hoàn thành nhiệm vụ hằng ngày để nhận thêm coin</li>
+        </ul>
+        <p><strong>Lưu ý:</strong> Đây chỉ là trò chơi giải trí, không liên quan đến tiền thật.</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
