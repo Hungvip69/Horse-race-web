@@ -167,7 +167,7 @@ body.dark-mode {
 }
 
 .horse-1, .horse-2, .horse-3, .horse-4, .horse-5, .horse-6 {
-    background-image: url('ezgif-222680507098f8.gif');
+    background-image: url('./ezgif-222680507098f8.gif');
     background-size: 80px auto;
 }
 
@@ -279,7 +279,7 @@ body.dark-mode {
 }
 
 .horse-1-avatar, .horse-2-avatar, .horse-3-avatar, .horse-4-avatar, .horse-5-avatar, .horse-6-avatar {
-    background-image: url('frame_3_delay-0.1s.gif');
+    background-image: url('./frame_3_delay-0.1s.gif');
     background-size: 70px auto;
 }
 
