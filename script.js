@@ -68,6 +68,15 @@ function loadGameData() {
     if (savedData) {
         const gameData = JSON.parse(savedData);
         coins = gameData.coins;
+        
+        // Đảm bảo các nhiệm vụ mới tồn tại
+        if (!gameData.missions.play5min) {
+            gameData.missions.play5min = { completed: false, claimed: false, reward: 150, description: "Chơi 5 phút" };
+        }
+        if (!gameData.missions.play10min) {
+            gameData.missions.play10min = { completed: false, claimed: false, reward: 300, description: "Chơi 10 phút" };
+        }
+        
         missions = gameData.missions;
         
         // Kiểm tra đăng nhập hàng ngày
@@ -115,37 +124,57 @@ function updateCoinsDisplay() {
 function updateMissionsDisplay() {
     // Nhiệm vụ đăng nhập
     const loginButton = document.querySelector('[data-mission="login"]');
-    loginButton.disabled = missions.login.claimed || !missions.login.completed;
+    if (loginButton) {
+        loginButton.disabled = missions.login.claimed || !missions.login.completed;
+    }
     
     // Nhiệm vụ đặt cược
     const betMission = document.getElementById('mission-bet');
-    betMission.querySelector('.mission-progress').textContent = `${missions.bet.count}/${missions.bet.target}`;
-    const betButton = document.querySelector('[data-mission="bet"]');
-    betButton.disabled = missions.bet.claimed || !missions.bet.completed;
+    if (betMission) {
+        betMission.querySelector('.mission-progress').textContent = `${missions.bet.count}/${missions.bet.target}`;
+        const betButton = document.querySelector('[data-mission="bet"]');
+        if (betButton) {
+            betButton.disabled = missions.bet.claimed || !missions.bet.completed;
+        }
+    }
     
     // Nhiệm vụ thắng
     const winMission = document.getElementById('mission-win');
-    winMission.querySelector('.mission-progress').textContent = `${missions.win.count}/${missions.win.target}`;
-    const winButton = document.querySelector('[data-mission="win"]');
-    winButton.disabled = missions.win.claimed || !missions.win.completed;
+    if (winMission) {
+        winMission.querySelector('.mission-progress').textContent = `${missions.win.count}/${missions.win.target}`;
+        const winButton = document.querySelector('[data-mission="win"]');
+        if (winButton) {
+            winButton.disabled = missions.win.claimed || !missions.win.completed;
+        }
+    }
     
     // Nhiệm vụ chơi 5 phút
     const play5minButton = document.querySelector('[data-mission="play5min"]');
-    play5minButton.disabled = missions.play5min.claimed || !missions.play5min.completed;
+    if (play5minButton) {
+        play5minButton.disabled = missions.play5min.claimed || !missions.play5min.completed;
+    }
     
     // Nhiệm vụ chơi 10 phút
     const play10minButton = document.querySelector('[data-mission="play10min"]');
-    play10minButton.disabled = missions.play10min.claimed || !missions.play10min.completed;
+    if (play10minButton) {
+        play10minButton.disabled = missions.play10min.claimed || !missions.play10min.completed;
+    }
     
     // Cập nhật trạng thái hoàn thành
     if (missions.bet.count >= missions.bet.target) {
         missions.bet.completed = true;
-        betButton.disabled = missions.bet.claimed;
+        const betButton = document.querySelector('[data-mission="bet"]');
+        if (betButton) {
+            betButton.disabled = missions.bet.claimed;
+        }
     }
     
     if (missions.win.count >= missions.win.target) {
         missions.win.completed = true;
-        winButton.disabled = missions.win.claimed;
+        const winButton = document.querySelector('[data-mission="win"]');
+        if (winButton) {
+            winButton.disabled = missions.win.claimed;
+        }
     }
 }
 
@@ -168,6 +197,14 @@ function showNotification(message, isError = false) {
 
 // Khởi tạo các phần tử
 function initElements() {
+    // Khởi tạo sự kiện cho các nút nhận thưởng nhiệm vụ
+    document.querySelectorAll('.claim-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const missionType = this.getAttribute('data-mission');
+            claimMissionReward(missionType);
+        });
+    });
+    
     // Lấy tham chiếu đến các phần tử ngựa
     horses.forEach(horse => {
         horse.element = document.getElementById(`horse-${horse.id}`);
