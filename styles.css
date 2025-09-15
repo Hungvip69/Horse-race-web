@@ -111,7 +111,7 @@ body.dark-mode {
 .race-track-container {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 400px;
     background-color: #8bc34a;
     border-radius: 10px;
     margin-bottom: 30px;
@@ -132,7 +132,7 @@ body.dark-mode {
 }
 
 .lane {
-    height: 20%;
+    height: 16.66%;
     width: 100%;
     position: relative;
     border-bottom: 2px dashed white;
@@ -166,9 +166,59 @@ body.dark-mode {
     transition: left 0.1s linear;
 }
 
-.horse-1, .horse-2, .horse-3, .horse-4, .horse-5, .horse-6 {
-    background-image: url('./ezgif-222680507098f8.gif');
+.horse-1 {
+    background-image: url('./horse_pic/horse1_idle.gif');
     background-size: 80px auto;
+}
+
+.horse-2 {
+    background-image: url('./horse_pic/horse2_idle.gif');
+    background-size: 80px auto;
+}
+
+.horse-3 {
+    background-image: url('./horse_pic/horse3_idle.gif');
+    background-size: 80px auto;
+}
+
+.horse-4 {
+    background-image: url('./horse_pic/horse4_idle.gif');
+    background-size: 80px auto;
+}
+
+.horse-5 {
+    background-image: url('./horse_pic/horse5_idle.gif');
+    background-size: 80px auto;
+}
+
+.horse-6 {
+    background-image: url('./horse_pic/horse6_idle.gif');
+    background-size: 80px auto;
+}
+
+/* Hình ảnh ngựa khi đang chạy */
+.horse-1.racing {
+    background-image: url('./horse_pic/horse1_running.gif');
+}
+
+.horse-2.racing {
+    background-image: url('./horse_pic/horse2_running.gif');
+}
+
+.horse-3.racing {
+    background-image: url('./horse_pic/horse3_running.gif');
+}
+
+.horse-4.racing {
+    background-image: url('./horse_pic/horse4_running.gif');
+}
+
+.horse-5.racing {
+    background-image: url('./horse_pic/horse5_running.gif');
+}
+
+.horse-6.racing {
+    background-image: url('./horse_pic/horse6_running.gif');
 }
 
 .horse-name {
@@ -283,8 +333,33 @@ body.dark-mode {
 
 
 
-.horse-1-avatar, .horse-2-avatar, .horse-3-avatar, .horse-4-avatar, .horse-5-avatar, .horse-6-avatar {
-    background-image: url('./frame_3_delay-0.1s.gif');
+.horse-1-avatar {
+    background-image: url('./horse_pic/horse1_idle.gif');
+    background-size: 70px auto;
+}
+
+.horse-2-avatar {
+    background-image: url('./horse_pic/horse2_idle.gif');
+    background-size: 70px auto;
+}
+
+.horse-3-avatar {
+    background-image: url('./horse_pic/horse3_idle.gif');
+    background-size: 70px auto;
+}
+
+.horse-4-avatar {
+    background-image: url('./horse_pic/horse4_idle.gif');
+    background-size: 70px auto;
+}
+
+.horse-5-avatar {
+    background-image: url('./horse_pic/horse5_idle.gif');
+    background-size: 70px auto;
+}
+
+.horse-6-avatar {
+    background-image: url('./horse_pic/horse6_idle.gif');
     background-size: 70px auto;
 }
 

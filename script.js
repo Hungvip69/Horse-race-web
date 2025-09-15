@@ -5,6 +5,8 @@ let betAmount = 100;
 let isRacing = false;
 let raceInterval;
 let isDarkMode = false;
+let gameStartTime = null;
+let playTime = 0; // Thời gian chơi tính bằng giây
 let horses = [
     { id: 1, name: "Thunder Bolt", position: 0, speed: 0, element: null },
     { id: 2, name: "Wild Spirit", position: 0, speed: 0, element: null },
@@ -18,8 +20,35 @@ let horses = [
 let missions = {
     login: { completed: false, claimed: false, reward: 100 },
     bet: { count: 0, target: 3, completed: false, claimed: false, reward: 200 },
-    win: { count: 0, target: 1, completed: false, claimed: false, reward: 300 }
+    win: { count: 0, target: 1, completed: false, claimed: false, reward: 300 },
+    play5min: { completed: false, claimed: false, reward: 150, description: "Chơi 5 phút" },
+    play10min: { completed: false, claimed: false, reward: 300, description: "Chơi 10 phút" }
 };
+
+// Hàm cập nhật thời gian chơi
+function updatePlayTime() {
+    if (gameStartTime === null) {
+        gameStartTime = new Date().getTime();
+    }
+    
+    const currentTime = new Date().getTime();
+    playTime = Math.floor((currentTime - gameStartTime) / 1000);
+    
+    // Kiểm tra nhiệm vụ thời gian chơi
+    if (playTime >= 300 && !missions.play5min.completed) { // 5 phút = 300 giây
+        missions.play5min.completed = true;
+        showNotification("Bạn đã hoàn thành nhiệm vụ chơi 5 phút!");
+        updateMissionsDisplay();
+        saveGameData();
+    }
+    
+    if (playTime >= 600 && !missions.play10min.completed) { // 10 phút = 600 giây
+        missions.play10min.completed = true;
+        showNotification("Bạn đã hoàn thành nhiệm vụ chơi 10 phút!");
+        updateMissionsDisplay();
+        saveGameData();
+    }
+}
 
 // Lưu trữ dữ liệu người chơi
 function saveGameData() {
@@ -27,7 +56,8 @@ function saveGameData() {
         coins,
         missions,
         lastLogin: new Date().toDateString(),
-        isDarkMode
+        isDarkMode,
+        playTime
     };
     localStorage.setItem('horseRaceGame', JSON.stringify(gameData));
 }
@@ -52,6 +82,10 @@ function loadGameData() {
             missions.win.count = 0;
             missions.win.completed = false;
             missions.win.claimed = false;
+            missions.play5min.completed = false;
+            missions.play5min.claimed = false;
+            missions.play10min.completed = false;
+            missions.play10min.claimed = false;
             
             // Cập nhật ngày đăng nhập
             saveGameData();
@@ -65,6 +99,11 @@ function loadGameData() {
     }
     updateCoinsDisplay();
     updateMissionsDisplay();
+    
+    // Bắt đầu đếm thời gian chơi
+    gameStartTime = new Date().getTime();
+    // Gọi hàm updatePlayTime mỗi giây
+    setInterval(updatePlayTime, 1000);
 }
 
 // Cập nhật hiển thị coin
@@ -89,6 +128,14 @@ function updateMissionsDisplay() {
     winMission.querySelector('.mission-progress').textContent = `${missions.win.count}/${missions.win.target}`;
     const winButton = document.querySelector('[data-mission="win"]');
     winButton.disabled = missions.win.claimed || !missions.win.completed;
+    
+    // Nhiệm vụ chơi 5 phút
+    const play5minButton = document.querySelector('[data-mission="play5min"]');
+    play5minButton.disabled = missions.play5min.claimed || !missions.play5min.completed;
+    
+    // Nhiệm vụ chơi 10 phút
+    const play10minButton = document.querySelector('[data-mission="play10min"]');
+    play10minButton.disabled = missions.play10min.claimed || !missions.play10min.completed;
     
     // Cập nhật trạng thái hoàn thành
     if (missions.bet.count >= missions.bet.target) {
@@ -124,10 +171,7 @@ function initElements() {
     // Lấy tham chiếu đến các phần tử ngựa
     horses.forEach(horse => {
         horse.element = document.getElementById(`horse-${horse.id}`);
-        // Đặt ảnh avatar cho ngựa khi khởi tạo
-        if (horse.element) {
-            horse.element.style.backgroundImage = "url('frame_3_delay-0.1s.gif')";
-        }
+        // Không cần đặt ảnh avatar cho ngựa khi khởi tạo vì đã xử lý bằng CSS
     });
     
     // Thiết lập sự kiện cho các nút đặt cược
@@ -232,8 +276,7 @@ horses.forEach(horse => {
     if (horse.element) {
         horse.element.style.left = '0px';
         horse.element.classList.add('racing');
-        // Thay đổi ảnh sang ảnh chạy
-        horse.element.style.backgroundImage = "url('ezgif-222680507098f8.gif')";
+        // Không cần thay đổi ảnh vì đã xử lý bằng CSS class .racing
     }
 });
     
@@ -276,8 +319,7 @@ function endRace(winnerHorse) {
     horses.forEach(horse => {
         if (horse.element) {
             horse.element.classList.remove('racing');
-            // Đổi lại ảnh avatar
-            horse.element.style.backgroundImage = "url('frame_3_delay-0.1s.gif')";
+            // Không cần đổi lại ảnh avatar vì đã xử lý bằng CSS class .racing
         }
     });
     
@@ -330,8 +372,8 @@ function resetRace() {
         if (horse.element) {
             horse.element.style.left = '0px';
             horse.element.classList.remove('winner');
-            // Đảm bảo ngựa sử dụng ảnh avatar khi chưa chạy
-            horse.element.style.backgroundImage = "url('frame_3_delay-0.1s.gif')";
+            // Đảm bảo ngựa không có class racing để hiển thị ảnh đứng yên
+            horse.element.classList.remove('racing');
         }
     });
     
